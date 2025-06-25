@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runs vs Balls Line Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <canvas id="xyChart" width="400" height="200"></canvas>
+
+    <script>
+        const data_1 = [
+            { "runs": 6, "balls": 1 }, { "runs": 7, "balls": 2 }, { "runs": 11, "balls": 3 },
+            { "runs": 17, "balls": 4 }, { "runs": 17, "balls": 5 }, { "runs": 17, "balls": 6 },
+            { "runs": 17, "balls": 7 }, { "runs": 22, "balls": 8 }, { "runs": 28, "balls": 9 },
+            { "runs": 28, "balls": 10 }, { "runs": 28, "balls": 11 }, { "runs": 28, "balls": 12 }
+        ];
+
+        const data_2 = [
+            { "runs": 1, "balls": 1 }, { "runs": 7, "balls": 2 }, { "runs": 7, "balls": 3 },
+            { "runs": 11, "balls": 4 }, { "runs": 15, "balls": 5 }, { "runs": 15, "balls": 6 },
+            { "runs": 23, "balls": 7 }, { "runs": 23, "balls": 8 }, { "runs": 23, "balls": 9 },
+            { "runs": 23, "balls": 10 }, { "runs": 23, "balls": 11 }, { "runs": 28, "balls": 12 }
+        ];
+
+        // Convert the data into x-y format for Chart.js
+        const dataset1 = data_1.map(point => ({ x: point.balls, y: point.runs }));
+        const dataset2 = data_2.map(point => ({ x: point.balls, y: point.runs }));
+
+        const ctx = document.getElementById('xyChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [
+                    {
+                        label: 'Player 1',
+                        data: dataset1,
+                        borderColor: 'blue',
+                        borderWidth: 2,
+                        fill: false
+                    },
+                    {
+                        label: 'Player 2',
+                        data: dataset2,
+                        borderColor: 'red',
+                        borderWidth: 2,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                parsing: {
+                    xAxisKey: 'x',  // Maps 'balls' to x-axis
+                    yAxisKey: 'y'   // Maps 'runs' to y-axis
+                },
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: 'Balls Faced'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Runs Scored'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
