@@ -1,4 +1,4 @@
 track_server/node_modules/
+track_server/.env
 track/node_modules/
 node_modules/
-track_sever/.env
