@@ -23,6 +23,7 @@ function App() {
         dispatch(fetch_account(response.data))
         dispatch(setStatus(1))
       } catch (error) {
+        console.log(error)
         dispatch(setStatus(2))
       }
     }
